@@ -199,10 +199,6 @@
 		<vocation name="Elder Druid"/>
 		<vocation name="Royal Paladin"/>
 	</instant>
-	<instant group="attack" name="Lightning" words="exori amp vis" lvl="55" mana="60" prem="1" range="4" casterTargetOrDirection="1" blockwalls="1" exhaustion="2000" needlearn="0" script="attack/lightning.lua">
-		<vocation name="Sorcerer"/>
-		<vocation name="Master Sorcerer"/>
-	</instant>
 	<instant group="support" name="Magic Rope" words="exani tera" lvl="9" mana="20" prem="1" aggressive="0" selftarget="1" exhaustion="1000" needlearn="0" script="support/magic rope.lua">
 		<vocation name="Sorcerer"/>
 		<vocation name="Druid"/>
