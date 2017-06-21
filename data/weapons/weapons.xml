@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <weapons>
 	<!-- Rods -->
-	<wand id="23721" level="1" mana="1" min="3" max="7" type="ice"> <!-- The Chiller -->
-		<vocation name="Druid" />
-	</wand>
 	<wand id="2182" level="7" mana="2" min="8" max="18" type="earth"> <!-- Snakebit Rod -->
 		<vocation name="Druid" />
 	</wand>
