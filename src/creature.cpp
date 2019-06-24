@@ -1390,7 +1390,7 @@ int64_t Creature::getStepDuration() const
 	uint32_t groundSpeed;
 	int32_t stepSpeed = getStepSpeed();
 
-	Item* ground = tile->getGround();
+	Item* ground = _tile->getGround();
 	if (ground) {
 		groundSpeed = Item::items[ground->getID()].speed;
 		if (groundSpeed == 0) {
