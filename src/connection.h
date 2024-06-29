@@ -63,8 +63,8 @@ class Connection : public std::enable_shared_from_this<Connection>
 		Connection(const Connection&) = delete;
 		Connection& operator=(const Connection&) = delete;
 
-		static const int write_timeout = 30;
-		static const int read_timeout = 30;
+		enum { write_timeout = 30 };
+		enum { read_timeout = 30 };
 
 		enum ConnectionState_t {
 			CONNECTION_STATE_OPEN,
