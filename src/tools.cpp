@@ -327,7 +327,7 @@ std::string formatDate(time_t time)
 	if (res < 0) {
 		return std::string();
 	}
-	return std::string(buffer, ::strlen(buffer);
+	return std::string(buffer, ::strlen(buffer));
 }
 
 
