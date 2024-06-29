@@ -29,13 +29,45 @@ extern Scheduler g_scheduler;
 const uint16_t OUTPUTMESSAGE_FREE_LIST_CAPACITY = 2048;
 const std::chrono::milliseconds OUTPUTMESSAGE_AUTOSEND_DELAY {10};
 
+template <typename T>
 class OutputMessageAllocator
 {
-	public:
-		typedef OutputMessage value_type;
-		template<typename U>
-		struct rebind {typedef LockfreePoolingAllocator<U, OUTPUTMESSAGE_FREE_LIST_CAPACITY> other;};
+public:
+	using value_type = T;
+
+	OutputMessageAllocator() = default;
+
+	template <typename U>
+	OutputMessageAllocator(const OutputMessageAllocator<U> &) {}
+
+	T *allocate(std::size_t n)
+	{
+		return LockfreePoolingAllocator<T, OUTPUTMESSAGE_FREE_LIST_CAPACITY>().allocate(n);
+	}
+
+	void deallocate(T *p, std::size_t n)
+	{
+		LockfreePoolingAllocator<T, OUTPUTMESSAGE_FREE_LIST_CAPACITY>().deallocate(p, n);
+	}
+
+	template <typename U>
+	struct rebind
+	{
+		typedef OutputMessageAllocator<U> other;
+	};
 };
+template <typename T, typename U>
+bool operator==(const OutputMessageAllocator<T> &, const OutputMessageAllocator<U> &)
+{
+	return true;
+}
+
+template <typename T, typename U>
+bool operator!=(const OutputMessageAllocator<T> &, const OutputMessageAllocator<U> &)
+{
+	return false;
+}
+
 
 void OutputMessagePool::scheduleSendAll()
 {
@@ -78,5 +110,5 @@ void OutputMessagePool::removeProtocolFromAutosend(const Protocol_ptr& protocol)
 
 OutputMessage_ptr OutputMessagePool::getOutputMessage()
 {
-	return std::allocate_shared<OutputMessage>(OutputMessageAllocator());
+	return std::allocate_shared<OutputMessage>(OutputMessageAllocator<OutputMessage>());
 }
